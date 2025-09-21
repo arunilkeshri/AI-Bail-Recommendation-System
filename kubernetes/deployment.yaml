@@ -1,1 +1,32 @@
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-bail-recommendation-system
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ai-bail-recommendation-system
+  template:
+    metadata:
+      labels:
+        app: ai-bail-recommendation-system
+    spec:
+      containers:
+      - name: backend
+        image: your-docker-hub-username/ai-bail-recommendation-backend:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DB_NAME
+          value: "bail_db"
+        - name: DB_USER
+          value: "bail_user"
+        - name: DB_PASSWORD
+          value: "bail_password"
+        - name: DB_HOST
+          value: "postgres-service"
+      - name: frontend
+        image: your-docker-hub-username/ai-bail-recommendation-frontend:latest
+        ports:
+        - containerPort: 3000
