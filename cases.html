@@ -3,89 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cases - AI Bail System</title>
+    <title>Case Files - AI Justice Matrix</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="preloader"><div class="preloader-icon">⚖️</div></div>
+    <div class="background-grid"></div>
+    <div class="cursor-light"></div>
 
-    <header class="navbar">
-        <a href="index.html" class="logo">⚖️ AI Justice</a>
-        <nav>
-            <a href="dashboard.html">Dashboard</a>
-            <a href="cases.html" class="active">Cases</a>
-            <a href="recommendations.html">Recommendations</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
+    <header class="navbar"></header>
 
-    <main class="cases-page">
-        <h2 class="page-title">Current Cases</h2>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Case ID</th>
-                        <th>Name</th>
-                        <th>Status</th>
-                        <th>Risk Score</th>
-                        <th>Last Updated</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>#AI-001</td>
-                        <td>John Doe</td>
-                        <td><span class="status-pending">Pending</span></td>
-                        <td>7.8</td>
-                        <td>2024-09-24</td>
-                    </tr>
-                    <tr>
-                        <td>#AI-002</td>
-                        <td>Jane Smith</td>
-                        <td><span class="status-recommended">Recommended</span></td>
-                        <td>4.1</td>
-                        <td>2024-09-23</td>
-                    </tr>
-                    <tr>
-                        <td>#AI-003</td>
-                        <td>Robert Johnson</td>
-                        <td><span class="status-pending">Pending</span></td>
-                        <td>9.2</td>
-                        <td>2024-09-24</td>
-                    </tr>
-                    <tr>
-                        <td>#AI-004</td>
-                        <td>Emily Davis</td>
-                        <td><span class="status-rejected">Rejected</span></td>
-                        <td>2.5</td>
-                        <td>2024-09-21</td>
-                    </tr>
-                    <tr>
-                        <td>#AI-005</td>
-                        <td>Michael Brown</td>
-                        <td><span class="status-recommended">Recommended</span></td>
-                        <td>5.9</td>
-                        <td>2024-09-22</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <main class="page-content">
+        <section class="content-section">
+            <h1 class="page-title" data-scroll-reveal>Case File Database</h1>
+            
+            <div class="datagrid-container" data-scroll-reveal>
+                <div class="datagrid-controls">
+                    <input type="text" id="searchInput" placeholder="Search cases by name or ID...">
+                </div>
+                
+                <table class="datagrid">
+                    <thead>
+                        <tr>
+                            <th data-sort="id">Case ID</th>
+                            <th data-sort="name">Defendant Name</th>
+                            <th data-sort="date">Date Filed</th>
+                            <th data-sort="status">Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="caseTableBody">
+                        </tbody>
+                </table>
+                
+                <div class="datagrid-pagination">
+                    </div>
+            </div>
+        </section>
     </main>
 
-    <footer class="footer">
-        <div class="footer-links">
-            <a href="dashboard.html">Dashboard</a>
-            <a href="cases.html">Cases</a>
-            <a href="recommendations.html">Recommendations</a>
-            <a href="about.html">About</a>
-            <a href="#">Legal</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
+    <div id="caseModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div id="modalBody">
+                </div>
         </div>
-        <p>&copy; 2024 AI Bail Recommendation System. All rights reserved.</p>
-    </footer>
-
+    </div>
+    
+    <footer class="footer"></footer>
     <script src="script.js"></script>
 </body>
 </html>
