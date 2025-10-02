@@ -1,213 +1,49 @@
-/* --- Add these new styles to your existing style.css --- */
-/* --- You can keep the :root, body, background, cursor, preloader, navbar, and hero styles --- */
+/* ADD THIS TO YOUR EXISTING style.css */
 
-/* --- STATS BAR --- */
-.stats-bar {
-    display: flex;
-    justify-content: space-around;
-    background: var(--card-bg);
-    margin: 0 auto 5rem;
-    padding: 2rem;
-    max-width: 1000px;
-    border-radius: 15px;
-    border: 1px solid var(--border-color);
-    backdrop-filter: blur(10px);
-    text-align: center;
-}
-.stat-item h3 {
-    font-size: 1rem;
-    color: var(--text-secondary);
-    font-weight: 400;
-    margin-bottom: 0.5rem;
-}
-.stat-item p {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--primary-glow);
-}
-
-/* --- BENTO GRID LAYOUT --- */
-.bento-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 250px);
-    gap: 1.5rem;
-    max-width: 1200px;
-    margin: auto;
-}
-.bento-cell {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
-    padding: 1.5rem;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.bento-cell::before { /* The magic hover glow */
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(300px circle at var(--mouse-x-card) var(--mouse-y-card), rgba(0, 191, 255, 0.2), transparent);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-.bento-cell:hover::before {
+/* --- GLOBAL PAGE TRANSITIONS --- */
+.page-content {
     opacity: 1;
+    transition: opacity 0.4s ease-in-out;
 }
-.bento-cell.cell-large {
-    grid-column: span 2;
-    grid-row: span 2;
-}
-.bento-cell.cell-medium {
-    grid-column: span 1;
-    grid-row: span 2;
-}
-.cell-content {
-    position: relative;
-    z-index: 2;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-.cell-content h4 { font-size: 1.5rem; margin-bottom: 0.5rem; }
-.cell-content p { color: var(--text-secondary); }
-
-
-/* --- CSS DATA SPHERE --- */
-.data-sphere-container {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-}
-.data-sphere {
-    width: 280px;
-    height: 280px;
-    position: relative;
-    transform-style: preserve-3d;
-    animation: rotate-sphere 30s linear infinite;
-}
-@keyframes rotate-sphere {
-    to { transform: rotateY(360deg) rotateX(360deg); }
-}
-.sphere-grid {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background-image:
-        linear-gradient(90deg, var(--border-glow) 1px, transparent 1px),
-        linear-gradient(0deg, var(--border-glow) 1px, transparent 1px);
-    background-size: 40px 40px;
-    opacity: 0.2;
-    position: absolute;
-}
-.orbit {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    transform-style: preserve-3d;
-    animation: rotate-orbit 10s linear infinite;
-    animation-delay: calc(var(--i) * -2s);
-    transform: rotateX(60deg) rotateY(calc(var(--i) * 30deg));
-}
-@keyframes rotate-orbit {
-    to { transform: rotateX(60deg) rotateY(calc(var(--i) * 30deg)) rotateZ(360deg); }
-}
-.dot {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background: var(--primary-glow);
-    border-radius: 50%;
-    top: 50%;
-    left: 0;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 10px var(--primary-glow);
-}
-
-/* --- TERMINAL & OTHER CELL STYLES --- */
-.terminal {
-    background: rgba(0,0,0,0.3);
-    border-radius: 5px;
-    padding: 1rem;
-    margin-top: 1rem;
-    font-family: monospace;
-    font-size: 0.8rem;
-    flex-grow: 1;
-}
-.terminal-ok { color: #00ff00; }
-.terminal-typing::after {
-    content: '_';
-    animation: blink 1s step-end infinite;
-}
-@keyframes blink { 50% { opacity: 0; }}
-
-.bias-chart { display: flex; align-items: flex-end; gap: 1rem; margin-top: 1.5rem; height: 80px; }
-.bar-before, .bar-after { width: 40px; background: var(--border-color); border-radius: 5px 5px 0 0; }
-.bar-before { height: 80%; }
-.bar-after { height: 30%; background: var(--primary-glow); }
-
-/* --- DID YOU KNOW SECTION --- */
-.did-you-know-container {
-    max-width: 800px;
-    margin: auto;
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
-    padding: 2.5rem;
-    min-height: 180px;
-    position: relative;
-}
-.fact-card {
-    position: absolute;
-    inset: 2.5rem;
+body.fade-out .page-content {
     opacity: 0;
-    transition: opacity 0.8s ease-in-out;
-}
-.fact-card.active { opacity: 1; }
-.fact-card h4 {
-    font-size: 1.2rem;
-    color: var(--secondary-glow);
-    margin-bottom: 1rem;
-}
-.fact-card p {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: var(--text-primary);
 }
 
-/* --- RESPONSIVENESS for Bento Grid --- */
-@media (max-width: 1024px) {
-    .bento-grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: auto;
-    }
-    .bento-cell.cell-large {
-        grid-column: span 2;
-        height: 400px;
-    }
-    .bento-cell.cell-medium {
-        grid-column: span 1;
-        height: 400px;
-    }
-}
-@media (max-width: 768px) {
-    .stats-bar { flex-direction: column; gap: 2rem; }
-    .bento-grid {
-        grid-template-columns: 1fr;
-    }
-    .bento-cell, .bento-cell.cell-large, .bento-cell.cell-medium {
-        grid-column: span 1;
-        grid-row: span 1;
-        height: auto;
-        min-height: 250px;
-    }
-     .bento-cell.cell-large { min-height: 400px; }
-}
+/* --- DASHBOARD STYLES --- */
+.dashboard-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.dashboard-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 1.5rem; }
+.dashboard-card.large-card { grid-column: span 2; }
+.dashboard-card h4 { margin-bottom: 1.5rem; }
+.status-indicator { display: flex; align-items: center; gap: 1rem; margin: 1rem 0; }
+.status-light { width: 15px; height: 15px; background: #00ff00; border-radius: 50%; box-shadow: 0 0 15px #00ff00; animation: pulse-green 2s infinite; }
+@keyframes pulse-green { 50% { opacity: 0.5; } }
+.activity-log { list-style: none; height: 200px; overflow-y: auto; font-size: 0.9rem; }
+.activity-log li { padding: 0.5rem 0; border-bottom: 1px solid var(--border-color); opacity: 0; animation: fadeIn 0.5s forwards; }
+.activity-log li:first-child { border-top: 1px solid var(--border-color); }
+
+/* --- DATAGRID (CASES PAGE) --- */
+.datagrid-container { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 1.5rem; }
+.datagrid-controls input { width: 100%; padding: 0.8rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 10px; margin-bottom: 1rem; }
+.datagrid { width: 100%; border-collapse: collapse; }
+.datagrid th { padding: 1rem; text-align: left; border-bottom: 2px solid var(--primary-glow); cursor: pointer; }
+.datagrid td { padding: 1rem; border-bottom: 1px solid var(--border-color); }
+.datagrid tbody tr:hover { background: rgba(0, 191, 255, 0.1); }
+.action-btn { background: none; border: 1px solid var(--primary-glow); color: var(--primary-glow); padding: 0.4rem 0.8rem; border-radius: 5px; cursor: pointer; }
+.datagrid-pagination { text-align: center; margin-top: 1.5rem; }
+.pagination-btn { background: none; border: 1px solid var(--border-color); color: var(--text-primary); padding: 0.5rem 1rem; margin: 0 0.2rem; cursor: pointer; }
+.pagination-btn.active { background: var(--primary-glow); color: var(--bg-color); }
+
+/* --- MODAL STYLES --- */
+.modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
+.modal-content { background: var(--bg-color); margin: 10% auto; padding: 2rem; border: 1px solid var(--border-glow); border-radius: 20px; max-width: 600px; position: relative; animation: slideIn 0.5s ease; }
+.modal-close { position: absolute; top: 1rem; right: 1.5rem; font-size: 2rem; cursor: pointer; }
+
+/* --- RECOMMENDATIONS PAGE --- */
+.filter-controls { margin-bottom: 2rem; text-align: center; }
+.filter-btn { /* Style buttons */ }
+.recommendation-card { /* Style your recommendation cards with gauges */ }
+.risk-gauge { /* Style risk gauge */ }
+
+/* --- ABOUT & CONTACT PAGES --- */
+.team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+/* Add styles for timeline, team cards, contact form validation etc. */
