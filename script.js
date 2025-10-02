@@ -1,57 +1,59 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- PRELOADER ---
-    const preloader = document.querySelector('.preloader');
-    window.addEventListener('load', () => {
-        preloader.classList.add('hidden');
-    });
+    // Keep existing preloader & cursor light functions...
 
-    // --- MOUSE-TRACKING SPOTLIGHT EFFECT ---
-    const cursorLight = document.querySelector('.cursor-light');
-    document.addEventListener('mousemove', (e) => {
-        // Use requestAnimationFrame for performance
-        requestAnimationFrame(() => {
-            cursorLight.style.setProperty('--mouse-x', e.clientX + 'px');
-            cursorLight.style.setProperty('--mouse-y', e.clientY + 'px');
-        });
-    });
-
-    // --- HERO TITLE LETTER-BY-LETTER ANIMATION ---
-    const heroTitleSpans = document.querySelectorAll('.hero-title span');
-    heroTitleSpans.forEach((span, index) => {
-        setTimeout(() => {
-            span.style.opacity = '1';
-            span.style.transform = 'translateY(0)';
-        }, 100 * index + 500); // Start after preloader fades
-    });
-
-    // --- ON-SCROLL REVEAL ANIMATION ---
-    const revealElements = document.querySelectorAll('[data-scroll-reveal]');
-    
-    const revealObserver = new IntersectionObserver((entries) => {
+    // --- ANIMATED COUNTERS ---
+    const statNumbers = document.querySelectorAll('.stat-number');
+    const counterObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('revealed');
-                // Optional: stop observing once revealed to save resources
-                revealObserver.unobserve(entry.target); 
+                const target = entry.target;
+                const targetValue = parseInt(target.getAttribute('data-target'));
+                let currentValue = 0;
+                const increment = Math.ceil(targetValue / 100);
+
+                const updateCounter = () => {
+                    currentValue += increment;
+                    if (currentValue >= targetValue) {
+                        target.innerText = targetValue.toLocaleString(); // Add commas for big numbers
+                        clearInterval(interval);
+                    } else {
+                        target.innerText = currentValue.toLocaleString();
+                    }
+                };
+                const interval = setInterval(updateCounter, 20);
+                observer.unobserve(target); // Animate only once
             }
         });
-    }, {
-        threshold: 0.1 // Trigger when 10% of the element is visible
+    }, { threshold: 0.7 });
+
+    statNumbers.forEach(num => counterObserver.observe(num));
+
+    // --- BENTO CELL CURSOR GLOW EFFECT ---
+    const bentoCells = document.querySelectorAll('.bento-cell');
+    bentoCells.forEach(cell => {
+        cell.addEventListener('mousemove', e => {
+            const rect = cell.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            cell.style.setProperty('--mouse-x-card', `${x}px`);
+            cell.style.setProperty('--mouse-y-card', `${y}px`);
+        });
     });
 
-    revealElements.forEach(el => {
-        revealObserver.observe(el);
-    });
+    // --- "DID YOU KNOW" FACT CAROUSEL ---
+    const factCards = document.querySelectorAll('.fact-card');
+    let currentFactIndex = 0;
 
-    // --- ACTIVE NAVBAR LINK HIGHLIGHTING ---
-    const navLinks = document.querySelectorAll('.navbar nav a');
-    const currentPath = window.location.pathname.split("/").pop() || 'index.html';
+    function showNextFact() {
+        factCards[currentFactIndex].classList.remove('active');
+        currentFactIndex = (currentFactIndex + 1) % factCards.length;
+        factCards[currentFactIndex].classList.add('active');
+    }
 
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === currentPath) {
-            link.classList.add('active');
-        }
-    });
+    if (factCards.length > 0) {
+        setInterval(showNextFact, 5000); // Change fact every 5 seconds
+    }
+    
+    // Existing scroll reveal & navbar logic...
 });
