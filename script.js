@@ -31,11 +31,14 @@ window.addEventListener('DOMContentLoaded', () => {
     // Active Navbar Link Highlighting
     const navLinks = document.querySelectorAll('.navbar nav a');
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-    navLinks.forEach(link => {
-        if (link.getAttribute('href') === currentPath) {
-            link.classList.add('active');
-        }
-    });
+    if(currentPath){
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPath) {
+                link.classList.add('active');
+            }
+        });
+    }
+
 
     // On-Scroll Reveal Animations
     const scrollObserver = new IntersectionObserver((entries) => {
@@ -146,6 +149,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const closeModal = document.querySelector('.modal-close');
 
         const renderTable = (data) => {
+            if(!tableBody) return;
             tableBody.innerHTML = '';
             data.forEach(caseItem => {
                 const row = document.createElement('tr');
@@ -163,32 +167,39 @@ window.addEventListener('DOMContentLoaded', () => {
         
         renderTable(casesData);
 
-        searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            const filteredData = casesData.filter(item => 
-                item.name.toLowerCase().includes(searchTerm) || 
-                item.id.toLowerCase().includes(searchTerm)
-            );
-            renderTable(filteredData);
-        });
+        if(searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredData = casesData.filter(item => 
+                    item.name.toLowerCase().includes(searchTerm) || 
+                    item.id.toLowerCase().includes(searchTerm)
+                );
+                renderTable(filteredData);
+            });
+        }
+        
+        if(tableBody) {
+            tableBody.addEventListener('click', (e) => {
+                if (e.target.classList.contains('action-btn')) {
+                    const caseId = e.target.getAttribute('data-id');
+                    const caseDetails = casesData.find(item => item.id === caseId);
+                    modalBody.innerHTML = `
+                        <h2>Case Details: ${caseDetails.id}</h2>
+                        <p><strong>Defendant:</strong> ${caseDetails.name}</p>
+                        <p><strong>Date Filed:</strong> ${caseDetails.date}</p>
+                        <p><strong>Status:</strong> ${caseDetails.status}</p>
+                        <hr>
+                        <p><strong>AI Analysis Summary:</strong></p>
+                        <p>${caseDetails.details}</p>
+                    `;
+                    modal.style.display = 'block';
+                }
+            });
+        }
 
-        tableBody.addEventListener('click', (e) => {
-            if (e.target.classList.contains('action-btn')) {
-                const caseId = e.target.getAttribute('data-id');
-                const caseDetails = casesData.find(item => item.id === caseId);
-                modalBody.innerHTML = `
-                    <h2>Case Details: ${caseDetails.id}</h2>
-                    <p><strong>Defendant:</strong> ${caseDetails.name}</p>
-                    <p><strong>Date Filed:</strong> ${caseDetails.date}</p>
-                    <p><strong>Status:</strong> ${caseDetails.status}</p>
-                    <hr>
-                    <p><strong>AI Analysis Summary:</strong></p>
-                    <p>${caseDetails.details}</p>
-                `;
-                modal.style.display = 'block';
-            }
-        });
-        closeModal.onclick = () => modal.style.display = "none";
+        if(closeModal) {
+            closeModal.onclick = () => modal.style.display = "none";
+        }
         window.onclick = (e) => {
             if (e.target == modal) {
                 modal.style.display = "none";
