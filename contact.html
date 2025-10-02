@@ -1,58 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - AI Bail System</title>
+    <title>Contact - AI Justice Matrix</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <header class="navbar">
-        <a href="index.html" class="logo">⚖️ AI Justice</a>
-        <nav>
-            <a href="dashboard.html">Dashboard</a>
-            <a href="cases.html">Cases</a>
-            <a href="recommendations.html">Recommendations</a>
-            <a href="about.html">About</a>
-            <a href="contact.html" class="active">Contact</a>
-        </nav>
-    </header>
-
-    <main class="contact-page">
-        <h2 class="page-title">Contact Us</h2>
-        <section class="contact-form-container">
-            <form action="#" method="POST" class="contact-form">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
+    <div id="preloader"></div>
+    <div class="background-grid"></div>
+    <div class="cursor-light"></div>
+    <header class="navbar"></header>
+    
+    <main class="page-content">
+        <section class="content-section">
+            <h1 class="page-title" data-scroll-reveal>Get In Touch</h1>
+            <div class="contact-layout">
+                <div class="contact-form-container" data-scroll-reveal>
+                    <form id="contactForm" novalidate>
+                        </form>
                 </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="submit-button">Send Message</button>
-            </form>
+                <div class="contact-info" data-scroll-reveal>
+                    </div>
+            </div>
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="footer-links">
-            <a href="dashboard.html">Dashboard</a>
-            <a href="cases.html">Cases</a>
-            <a href="recommendations.html">Recommendations</a>
-            <a href="about.html">About</a>
-            <a href="#">Legal</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-        </div>
-        <p>&copy; 2024 AI Bail Recommendation System. All rights reserved.</p>
-    </footer>
-
+    <footer class="footer"></footer>
     <script src="script.js"></script>
 </body>
 </html>
