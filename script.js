@@ -1,43 +1,57 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Enhanced Hover Effects (Now managed primarily by CSS, keeping JS minimal)
-    const cards = document.querySelectorAll('.stat-card, .chart-card, .recommendation-card');
-    // We can still use JS to add/remove a special class if a more complex animation is needed,
-    // but for now, the CSS handles the slick translateY and glow on :hover.
 
-    // 2. Continuous Floating Symbols (Enhanced)
-    function createJusticeSymbol() {
-        const symbol = document.createElement('div');
-        symbol.classList.add('justice-symbol');
-        
-        // Use a more abstract, high-tech icon or character
-        const symbols = ['\u25b2', '\u25c6', '0', '1']; // Triangle, Diamond, Binary
-        symbol.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-        document.body.appendChild(symbol);
+    // --- PRELOADER ---
+    const preloader = document.querySelector('.preloader');
+    window.addEventListener('load', () => {
+        preloader.classList.add('hidden');
+    });
 
-        const size = Math.random() * 1.5 + 1; // Smaller, more subtle size
-        symbol.style.fontSize = `${size}rem`;
-        
-        const x = Math.random() * 100;
-        const y = Math.random() * 100;
-        symbol.style.left = `${x}vw`;
-        symbol.style.top = `${y}vh`;
+    // --- MOUSE-TRACKING SPOTLIGHT EFFECT ---
+    const cursorLight = document.querySelector('.cursor-light');
+    document.addEventListener('mousemove', (e) => {
+        // Use requestAnimationFrame for performance
+        requestAnimationFrame(() => {
+            cursorLight.style.setProperty('--mouse-x', e.clientX + 'px');
+            cursorLight.style.setProperty('--mouse-y', e.clientY + 'px');
+        });
+    });
 
-        const duration = Math.random() * 15 + 10;
-        const delay = Math.random() * 5;
-        symbol.style.animationDuration = `${duration}s`;
-        symbol.style.animationDelay = `${delay}s`;
-
-        // Remove symbol after a long time
+    // --- HERO TITLE LETTER-BY-LETTER ANIMATION ---
+    const heroTitleSpans = document.querySelectorAll('.hero-title span');
+    heroTitleSpans.forEach((span, index) => {
         setTimeout(() => {
-            symbol.remove();
-        }, duration * 1000 + 500); 
-    }
+            span.style.opacity = '1';
+            span.style.transform = 'translateY(0)';
+        }, 100 * index + 500); // Start after preloader fades
+    });
 
-    // Generate a good number of initial symbols for ambiance
-    for (let i = 0; i < 15; i++) {
-        createJusticeSymbol();
-    }
+    // --- ON-SCROLL REVEAL ANIMATION ---
+    const revealElements = document.querySelectorAll('[data-scroll-reveal]');
     
-    // Periodically add new symbols for continuous effect
-    setInterval(createJusticeSymbol, 3000); 
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                // Optional: stop observing once revealed to save resources
+                revealObserver.unobserve(entry.target); 
+            }
+        });
+    }, {
+        threshold: 0.1 // Trigger when 10% of the element is visible
+    });
+
+    revealElements.forEach(el => {
+        revealObserver.observe(el);
+    });
+
+    // --- ACTIVE NAVBAR LINK HIGHLIGHTING ---
+    const navLinks = document.querySelectorAll('.navbar nav a');
+    const currentPath = window.location.pathname.split("/").pop() || 'index.html';
+
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === currentPath) {
+            link.classList.add('active');
+        }
+    });
 });
