@@ -13,6 +13,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     // Smooth Page Transition Logic
+    document.body.style.opacity = 1; // Ensure body is visible on load
     const allLinks = document.querySelectorAll('a:not([href^="#"]):not([target="_blank"])');
     allLinks.forEach(link => {
         link.addEventListener('click', e => {
@@ -114,15 +115,17 @@ window.addEventListener('DOMContentLoaded', () => {
             "Data ingestion complete from District 5."
         ];
         let activityIndex = 0;
-        setInterval(() => {
-            if (activityLog.children.length > 5) {
-                activityLog.removeChild(activityLog.lastChild);
-            }
-            const li = document.createElement('li');
-            li.textContent = `[${new Date().toLocaleTimeString()}] ${activities[activityIndex]}`;
-            activityLog.prepend(li);
-            activityIndex = (activityIndex + 1) % activities.length;
-        }, 3000);
+        if(activityLog) {
+            setInterval(() => {
+                if (activityLog.children.length > 5) {
+                    activityLog.removeChild(activityLog.lastChild);
+                }
+                const li = document.createElement('li');
+                li.textContent = `[${new Date().toLocaleTimeString()}] ${activities[activityIndex]}`;
+                activityLog.prepend(li);
+                activityIndex = (activityIndex + 1) % activities.length;
+            }, 3000);
+        }
     }
 
     // --- SCRIPT FOR: cases.html ---
@@ -146,6 +149,7 @@ window.addEventListener('DOMContentLoaded', () => {
             tableBody.innerHTML = '';
             data.forEach(caseItem => {
                 const row = document.createElement('tr');
+                // Note: a simple status-tag class for basic styling
                 row.innerHTML = `
                     <td>${caseItem.id}</td>
                     <td>${caseItem.name}</td>
@@ -157,10 +161,8 @@ window.addEventListener('DOMContentLoaded', () => {
             });
         };
         
-        // Initial render
         renderTable(casesData);
 
-        // Search functionality
         searchInput.addEventListener('input', (e) => {
             const searchTerm = e.target.value.toLowerCase();
             const filteredData = casesData.filter(item => 
@@ -170,7 +172,6 @@ window.addEventListener('DOMContentLoaded', () => {
             renderTable(filteredData);
         });
 
-        // Modal functionality
         tableBody.addEventListener('click', (e) => {
             if (e.target.classList.contains('action-btn')) {
                 const caseId = e.target.getAttribute('data-id');
