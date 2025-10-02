@@ -10,25 +10,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="preloader">
-        <div class="preloader-icon">⚖️</div>
-    </div>
+    <div id="preloader"><div class="preloader-icon">⚖️</div></div>
     <div class="background-grid"></div>
     <div class="cursor-light"></div>
 
     <header class="navbar">
         <a href="index.html" class="logo">AI Justice ⚖️</a>
         <nav>
-            <a href="index.html" class="active">Home</a>
+            <a href="index.html">Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="cases.html">Case Files</a>
-            <a href="about.html">The Initiative</a>
+            <a href="recommendations.html">Recommendations</a>
+            <a href="about.html">About</a>
             <a href="contact.html">Contact</a>
         </nav>
     </header>
 
-    <main>
+    <main class="page-content">
         <section class="hero-section">
             <div class="hero-content">
                 <h1 class="hero-title">
@@ -40,101 +38,24 @@
                 <a href="#matrix" class="cta-button" data-scroll-reveal>Enter the Matrix</a>
             </div>
         </section>
-
         <section class="stats-bar" data-scroll-reveal>
-            <div class="stat-item">
-                <h3>Cases Analyzed</h3>
-                <p class="stat-number" data-target="137842">0</p>
-            </div>
-            <div class="stat-item">
-                <h3>Prediction Accuracy</h3>
-                <p><span class="stat-number" data-target="94">0</span>%</p>
-            </div>
-            <div class="stat-item">
-                <h3>Bias Reduction</h3>
-                <p><span class="stat-number" data-target="47">0</span>%</p>
-            </div>
+            <div class="stat-item"><h3>Cases Analyzed</h3><p class="stat-number" data-target="137842">0</p></div>
+            <div class="stat-item"><h3>Prediction Accuracy</h3><p><span class="stat-number" data-target="94">0</span>%</p></div>
+            <div class="stat-item"><h3>Bias Reduction</h3><p><span class="stat-number" data-target="47">0</span>%</p></div>
         </section>
-
-
         <section class="content-section" id="matrix">
-             <h2 class="section-title" data-scroll-reveal>System Matrix</h2>
+            <h2 class="section-title" data-scroll-reveal>System Matrix</h2>
             <div class="bento-grid">
-                
-                <div class="bento-cell cell-large" data-scroll-reveal>
-                    <div class="data-sphere-container">
-                        <div class="data-sphere">
-                            <div class="sphere-grid"></div>
-                            <div class="orbit" style="--i:1;"><div class="dot"></div></div>
-                            <div class="orbit" style="--i:2;"><div class="dot"></div></div>
-                            <div class="orbit" style="--i:3;"><div class="dot"></div></div>
-                            <div class="orbit" style="--i:4;"><div class="dot"></div></div>
-                        </div>
-                    </div>
-                    <div class="cell-content">
-                        <h4>Global Data Nexus</h4>
-                        <p>Our AI constantly assimilates legal data from global sources.</p>
-                    </div>
-                </div>
-
-                <div class="bento-cell cell-medium" data-scroll-reveal>
-                    <div class="cell-content">
-                        <h4>Live Processing</h4>
-                        <div class="terminal">
-                            <p>> Initializing secure connection...</p>
-                            <p>> Authenticated.</p>
-                            <p>> Analyzing Case #8B3D4F...</p>
-                            <p>> Cross-referencing precedents...</p>
-                            <p>> Bias check... <span class="terminal-ok">OK</span></p>
-                            <p class="terminal-typing">> Generating risk profile... </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bento-cell" data-scroll-reveal>
-                     <div class="cell-content">
-                        <h4>Bias Mitigation</h4>
-                        <p>Actively neutralizes demographic and historical biases.</p>
-                        <div class="bias-chart">
-                           <div class="bar-before"></div>
-                           <div class="bar-after"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                 <div class="bento-cell" data-scroll-reveal>
-                    <div class="cell-content">
-                        <h4>Explainable AI (XAI)</h4>
-                        <p>Every recommendation is transparent and fully auditable.</p>
-                    </div>
-                </div>
-
+                <div class="bento-cell cell-large" data-scroll-reveal><div class="data-sphere-container"><div class="data-sphere"><div class="sphere-grid"></div><div class="orbit" style="--i:1;"><div class="dot"></div></div><div class="orbit" style="--i:2;"><div class="dot"></div></div><div class="orbit" style="--i:3;"><div class="dot"></div></div><div class="orbit" style="--i:4;"><div class="dot"></div></div></div></div><div class="cell-content"><h4>Global Data Nexus</h4><p>Our AI constantly assimilates legal data from global sources.</p></div></div>
+                <div class="bento-cell cell-medium" data-scroll-reveal><div class="cell-content"><h4>Live Processing</h4><div class="terminal"><p>> Initializing secure connection...</p><p>> Authenticated.</p><p>> Analyzing Case #8B3D4F...</p><p>> Cross-referencing precedents...</p><p>> Bias check... <span class="terminal-ok">OK</span></p><p class="terminal-typing">> Generating risk profile... </p></div></div></div>
+                <div class="bento-cell" data-scroll-reveal><div class="cell-content"><h4>Bias Mitigation</h4><p>Actively neutralizes demographic and historical biases.</p><div class="bias-chart"><div class="bar-before"></div><div class="bar-after"></div></div></div></div>
+                <div class="bento-cell" data-scroll-reveal><div class="cell-content"><h4>Explainable AI (XAI)</h4><p>Every recommendation is transparent and fully auditable.</p></div></div>
             </div>
         </section>
-        
-        <section class="content-section" id="facts">
-             <h2 class="section-title" data-scroll-reveal>System Intel</h2>
-             <div class="did-you-know-container" data-scroll-reveal>
-                 <div class="fact-card active">
-                     <h4>Did you know?</h4>
-                     <p>Our AI can process the equivalent of 50,000 pages of legal documents in under 3 seconds.</p>
-                 </div>
-                 <div class="fact-card">
-                     <h4>Did you know?</h4>
-                     <p>The system re-trains its models every 24 hours to adapt to new legal precedents and data trends.</p>
-                 </div>
-                 <div class="fact-card">
-                     <h4>Did you know?</h4>
-                     <p>By identifying low-risk individuals more accurately, the system has helped reduce pre-trial detention costs by an estimated 22%.</p>
-                 </div>
-             </div>
-        </section>
-
     </main>
 
     <footer class="footer">
         </footer>
-
     <script src="script.js"></script>
 </body>
 </html>
