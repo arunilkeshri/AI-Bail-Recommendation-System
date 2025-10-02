@@ -1,30 +1,36 @@
-/* Custom cursor for the entire site */
-html, body {
-    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" style="fill:rgba(255, 255, 255, 0.8);"><text y="15" font-size="15">⚖️</text></svg>') 15 15, auto !important;
-}
-
-/* Base Styles */
+/* --- High-Level 'Dark Justice' Design Variables --- */
 :root {
-    --bg-color: #0d0f1a;
-    --card-bg: rgba(25, 27, 40, 0.4);
-    --border-color: rgba(60, 65, 85, 0.3);
-    --text-color: #e0e6ff;
-    --highlight-blue: #00aaff;
-    --highlight-gold: #ffc400;
-    --glow-blue: #007bff;
-    --glow-gold: #ffb700;
+    --bg-color: #030a1c; /* Deeper, darker cosmos blue */
+    --card-bg: rgba(9, 17, 39, 0.7); /* Translucent, deep card background */
+    --border-color: rgba(65, 105, 225, 0.15); /* Subtle blue/purple border */
+    --text-color: #f0f2ff; /* Near-white for contrast */
+    --subtle-text: #a8b0c4; /* Light gray for secondary text */
+    --highlight-blue: #00e5ff; /* Intense, electric blue neon */
+    --highlight-gold: #ffb300; /* Rich, authoritative gold */
+    --glow-blue: rgba(0, 229, 255, 0.5);
+    --glow-gold: rgba(255, 179, 0, 0.5);
+    --hover-bg: rgba(1, 10, 30, 0.5);
+    --transition-speed: 0.4s;
 }
 
+/* Base and Global Effects */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font choice */
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;
-    line-height: 1.6;
+    line-height: 1.7;
     overflow-x: hidden;
     position: relative;
+    transition: background-color var(--transition-speed);
 }
 
+/* Custom Cursor - More subtle for premium feel */
+html, body {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="fill:rgba(0, 229, 255, 0.9); stroke:rgba(255, 255, 255, 0.3); stroke-width:1;"><circle cx="12" cy="12" r="5"/></svg>') 12 12, auto !important;
+}
+
+/* Enhanced Background Gradient (Subtle depth) */
 body::before {
     content: '';
     position: fixed;
@@ -33,98 +39,108 @@ body::before {
     width: 100%;
     height: 100%;
     background: 
-        radial-gradient(circle at 20% 80%, rgba(0, 100, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 196, 0, 0.1) 0%, transparent 50%);
-    background-size: 150% 150%;
-    animation: gradient-animation 20s ease-in-out infinite;
+        radial-gradient(circle at 10% 90%, rgba(0, 229, 255, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 10%, rgba(255, 179, 0, 0.05) 0%, transparent 40%);
+    background-size: 200% 200%;
+    animation: gradient-animation 30s ease-in-out infinite;
     z-index: -2;
 }
 
 @keyframes gradient-animation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
 }
 
-/* Floating justice symbols */
+/* Floating symbols - More abstract, like data particles */
 .justice-symbol {
-    position: absolute;
-    opacity: 0.1;
-    font-size: 2rem;
+    opacity: 0.05; /* Extremely subtle */
+    font-size: 2.5rem;
     color: var(--highlight-blue);
-    animation: float 15s ease-in-out infinite;
-}
-
-.justice-symbol:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; }
-.justice-symbol:nth-child(2) { top: 50%; left: 80%; animation-delay: 5s; }
-.justice-symbol:nth-child(3) { top: 75%; left: 30%; animation-delay: 10s; }
-.justice-symbol:nth-child(4) { top: 25%; left: 60%; animation-delay: 7s; }
-
-@keyframes float {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(15deg); }
+    animation: float 20s ease-in-out infinite alternate;
 }
 
 main {
-    padding: 2rem;
+    padding: 3rem 4rem; /* More spacing for premium look */
     min-height: calc(100vh - 120px);
+    max-width: 1400px; /* Max width for content centering */
+    margin: 0 auto;
 }
 
 .page-title {
-    text-align: center;
-    font-size: 3rem;
-    margin-bottom: 2rem;
-    text-shadow: 0 0 10px var(--glow-blue), 0 0 20px var(--glow-blue);
+    font-size: 3.5rem;
+    margin-bottom: 3rem;
+    letter-spacing: 2px;
+    font-weight: 200; /* Lighter weight for modern feel */
+    color: var(--text-color);
+    text-shadow: 0 0 15px var(--glow-blue);
+    position: relative;
 }
 
-/* Navbar */
+.page-title::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 3px;
+    margin: 1rem auto 0;
+    background: linear-gradient(90deg, transparent, var(--highlight-blue), transparent);
+}
+
+
+/* --- Navbar - A slick, 'Skeletal' component --- */
 .navbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
-    background: rgba(25, 27, 40, 0.6);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(60, 65, 85, 0.3);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    padding: 1rem 4rem;
+    background: rgba(9, 17, 39, 0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 229, 255, 0.1); /* Subtle, high-tech bottom line */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .navbar .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
+    font-size: 1.75rem;
+    font-weight: 700;
     color: var(--text-color);
     text-decoration: none;
-    text-shadow: 0 0 5px var(--glow-gold);
-    transition: color 0.3s;
+    letter-spacing: 1px;
+    transition: var(--transition-speed);
+    text-shadow: 0 0 8px var(--glow-gold);
 }
 
 .navbar nav a {
-    color: var(--text-color);
+    color: var(--subtle-text);
     text-decoration: none;
-    margin-left: 2rem;
-    font-size: 1rem;
+    margin-left: 2.5rem;
+    font-size: 1.05rem;
+    font-weight: 300;
+    padding: 0.5rem 0;
     position: relative;
-    transition: color 0.3s, text-shadow 0.3s;
+    transition: color var(--transition-speed), text-shadow var(--transition-speed);
 }
 
 .navbar nav a:hover,
 .navbar nav a.active {
     color: var(--highlight-blue);
-    text-shadow: 0 0 5px var(--glow-blue), 0 0 10px var(--glow-blue);
+    text-shadow: 0 0 8px var(--glow-blue);
 }
 
+/* Neon Underline Component (More refined) */
 .navbar nav a::after {
     content: '';
     position: absolute;
     width: 0;
-    height: 2px;
-    bottom: -5px;
-    left: 0;
-    background: linear-gradient(90deg, var(--highlight-blue), var(--highlight-gold));
-    transition: width 0.3s ease-in-out;
+    height: 3px;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--highlight-blue);
+    box-shadow: 0 0 10px var(--glow-blue);
+    transition: width var(--transition-speed) ease-out;
 }
 
 .navbar nav a:hover::after,
@@ -132,69 +148,80 @@ main {
     width: 100%;
 }
 
-/* Footer */
+
+/* --- Footer - Clean and minimal --- */
 .footer {
-    padding: 1.5rem 2rem;
+    padding: 2rem 4rem;
     text-align: center;
-    border-top: 1px solid rgba(60, 65, 85, 0.3);
-    background: rgba(25, 27, 40, 0.4);
-    backdrop-filter: blur(5px);
+    border-top: 1px solid rgba(0, 229, 255, 0.1);
+    background: rgba(9, 17, 39, 0.5);
+    color: var(--subtle-text);
 }
 
 .footer-links a {
-    color: var(--text-color);
+    color: var(--subtle-text);
     text-decoration: none;
-    margin: 0 1rem;
-    transition: color 0.3s, text-shadow 0.3s;
+    margin: 0 1.5rem;
+    transition: color 0.3s;
 }
 
 .footer-links a:hover {
     color: var(--highlight-gold);
-    text-shadow: 0 0 5px var(--glow-gold);
 }
 
-/* Home Page */
+.footer p {
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+}
+
+
+/* --- Home Page Hero Section (Maximum Impact) --- */
 .home-page {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 80px); /* Adjust for navbar height */
+    height: calc(100vh - 100px);
     text-align: center;
 }
 
-.hero-section {
-    max-width: 800px;
-}
-
 .hero-title {
-    font-size: 4rem;
-    background: linear-gradient(90deg, var(--highlight-blue), var(--highlight-gold));
+    font-size: 5.5rem;
+    font-weight: 900;
+    letter-spacing: -2px;
+    line-height: 1;
+    background: linear-gradient(90deg, var(--highlight-blue) 0%, var(--highlight-gold) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 15px var(--glow-blue), 0 0 30px var(--glow-blue);
+    text-shadow: 0 0 20px var(--glow-blue), 0 0 40px rgba(255, 179, 0, 0.3);
 }
 
 .hero-subtitle {
-    font-size: 1.5rem;
-    margin: 1.5rem 0;
-    color: var(--text-color);
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    font-size: 1.75rem;
+    font-weight: 300;
+    margin: 2rem 0 3rem;
+    color: var(--subtle-text);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
+/* High-Impact Call to Action Button */
 .cta-button {
     display: inline-block;
-    padding: 1rem 2rem;
-    margin-top: 2rem;
-    background: linear-gradient(45deg, var(--highlight-blue), var(--highlight-gold));
-    border: none;
-    border-radius: 50px;
+    padding: 1.1rem 3rem;
+    background: var(--highlight-blue);
+    border: 2px solid var(--highlight-blue);
+    border-radius: 8px;
     color: var(--bg-color);
-    font-weight: bold;
+    font-weight: 700;
+    font-size: 1.1rem;
     text-decoration: none;
-    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+    letter-spacing: 1px;
+    transition: all var(--transition-speed);
     position: relative;
     overflow: hidden;
     z-index: 1;
+    box-shadow: 0 0 10px var(--glow-blue);
 }
 
 .cta-button::before {
@@ -204,30 +231,25 @@ main {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.1);
+    background: linear-gradient(45deg, var(--highlight-gold), var(--highlight-blue));
     transform: translateX(-100%);
-    transition: transform 0.4s ease-in-out;
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
     z-index: -1;
+    opacity: 0.8;
+}
+
+.cta-button:hover {
+    color: var(--text-color);
+    border-color: var(--highlight-gold);
+    box-shadow: 0 0 30px var(--glow-gold), 0 0 50px var(--glow-blue);
 }
 
 .cta-button:hover::before {
     transform: translateX(0);
 }
 
-.cta-button:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 0 20px var(--glow-blue), 0 0 40px var(--glow-gold);
-}
 
-/* Dashboard Page */
-.dashboard-page,
-.cases-page,
-.recommendations-page,
-.about-page,
-.contact-page {
-    padding: 4rem 2rem;
-}
-
+/* --- Component Card Base (The 'React-bit' style) --- */
 .stat-card,
 .chart-card,
 .recommendation-card,
@@ -236,247 +258,186 @@ main {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
     backdrop-filter: blur(15px);
-    border-radius: 15px;
-    padding: 2rem;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s, box-shadow 0.3s;
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    position: relative;
+    overflow: hidden;
 }
 
+/* Inner Skeletal Highlight on Hover */
 .stat-card:hover,
 .chart-card:hover,
 .recommendation-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 0 30px var(--glow-blue), 0 0 50px rgba(255, 196, 0, 0.2);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), 
+                0 0 25px var(--glow-blue);
 }
 
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-bottom: 3rem;
-    text-align: center;
-}
-
-.stat-card h3 {
-    margin: 0 0 0.5rem;
-    font-size: 1.5rem;
-    color: var(--highlight-gold);
-}
-
-.stat-card p {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: var(--highlight-blue);
-    text-shadow: 0 0 10px var(--glow-blue);
-}
-
-.charts-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-}
-
-.chart-placeholder {
-    height: 250px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px dashed rgba(255, 255, 255, 0.2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: rgba(255, 255, 255, 0.4);
-    font-style: italic;
-    border-radius: 10px;
-}
-
-/* Cases Page */
-.table-container {
-    overflow-x: auto;
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    backdrop-filter: blur(15px);
-    border-radius: 15px;
-    padding: 1.5rem;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-}
-
-table {
+/* Add a subtle edge glow on hover */
+.stat-card::after,
+.chart-card::after,
+.recommendation-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    border-collapse: collapse;
+    height: 100%;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    transition: border-color var(--transition-speed);
+    pointer-events: none;
+    box-shadow: 0 0 0 transparent;
 }
 
-th, td {
-    padding: 1rem;
-    text-align: left;
-    border-bottom: 1px solid var(--border-color);
+.stat-card:hover::after,
+.chart-card:hover::after,
+.recommendation-card:hover::after {
+    border-color: var(--highlight-blue);
+    box-shadow: 0 0 15px var(--glow-blue) inset;
 }
 
-th {
-    font-weight: bold;
-    color: var(--highlight-gold);
-    text-transform: uppercase;
-}
 
-tr:hover {
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.status-pending { color: var(--highlight-gold); }
-.status-recommended { color: var(--highlight-blue); }
-.status-rejected { color: #ff5555; }
-
-/* Recommendations Page */
-.recommendations-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.recommendation-card h3 {
-    margin-top: 0;
-    font-size: 1.5rem;
-    color: var(--highlight-blue);
-}
-
-.recommendation-card p.status {
-    font-weight: bold;
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-}
-
-/* About Page */
-.about-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* Dashboard Stats */
+.stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 3rem;
 }
 
-.about-text {
-    max-width: 700px;
-    text-align: center;
+.stat-card h3 {
+    font-size: 1.1rem;
+    color: var(--subtle-text);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.about-text h3 {
-    font-size: 2rem;
+.stat-card p {
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-top: 0.5rem;
     color: var(--highlight-gold);
+    text-shadow: 0 0 10px rgba(255, 179, 0, 0.4);
 }
 
-.about-image img {
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-    border-radius: 10px;
+
+/* Tables (Cases) - Sleek and Data-Driven */
+.table-container {
+    padding: 0; /* Remove padding from container, add to table elements */
+    background: var(--card-bg);
     border: 1px solid var(--border-color);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s, box-shadow 0.3s;
+    border-radius: 12px;
+    overflow: hidden; /* For smooth corners */
 }
 
-.about-image img:hover {
-    transform: scale(1.02);
-    box-shadow: 0 0 30px var(--glow-blue), 0 0 50px var(--glow-gold);
+table {
+    border-collapse: separate;
+    border-spacing: 0;
 }
 
-/* Contact Page */
-.contact-form-container {
-    max-width: 600px;
-    margin: auto;
+th {
+    padding: 1.2rem 1.5rem;
+    background-color: rgba(9, 17, 39, 0.9);
+    font-weight: 500;
+    color: var(--highlight-blue);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid var(--border-color);
 }
 
-.contact-form .form-group {
-    margin-bottom: 1.5rem;
+td {
+    padding: 1.2rem 1.5rem;
+    color: var(--text-color);
+    border-bottom: 1px solid rgba(65, 105, 225, 0.1);
 }
 
-.contact-form label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: var(--highlight-gold);
+/* Premium row hover */
+tr:hover {
+    background: var(--hover-bg);
+    box-shadow: inset 3px 0 0 var(--highlight-gold); /* Subtle left border highlight */
 }
 
+.status-pending { color: var(--highlight-gold); font-weight: 600; }
+.status-recommended { color: var(--highlight-blue); font-weight: 600; }
+.status-rejected { color: #ff5555; font-weight: 600; }
+
+
+/* Form Elements (Contact Page) */
 .contact-form input,
 .contact-form textarea {
-    width: 100%;
-    padding: 0.8rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
     color: var(--text-color);
-    transition: border-color 0.3s, box-shadow 0.3s;
+    transition: all 0.3s;
+    font-size: 1rem;
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-    outline: none;
     border-color: var(--highlight-blue);
-    box-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .submit-button {
+    /* Reuse CTA button style for consistency */
+    display: block;
     width: 100%;
-    padding: 1rem;
+    padding: 1.1rem;
+    margin-top: 2rem;
     background: linear-gradient(90deg, var(--highlight-blue), var(--highlight-gold));
     border: none;
     border-radius: 8px;
     color: var(--bg-color);
-    font-size: 1.1rem;
-    font-weight: bold;
+    font-size: 1.2rem;
+    font-weight: 700;
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .submit-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 0 15px var(--glow-blue), 0 0 25px var(--glow-gold);
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px var(--glow-blue), 0 0 30px var(--glow-gold);
 }
 
-/* Responsive Design */
-@media (min-width: 768px) {
-    .charts-grid {
-        grid-template-columns: 1fr 1fr;
+/* Media Queries (Responsive) - Keep it clean */
+@media (max-width: 1024px) {
+    main {
+        padding: 3rem 2rem;
     }
-    
-    .about-content {
-        flex-direction: row;
-        text-align: left;
+    .navbar {
+        padding: 1rem 2rem;
     }
-
-    .about-text {
-        text-align: left;
+    .hero-title {
+        font-size: 4rem;
     }
-
-    .about-image {
-        flex: 1;
+    .hero-subtitle {
+        font-size: 1.5rem;
     }
 }
 
 @media (max-width: 767px) {
     .navbar {
         flex-direction: column;
-        padding: 1rem;
+        align-items: flex-start;
     }
-    
     .navbar nav {
         margin-top: 1rem;
-        flex-wrap: wrap;
-        justify-content: center;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
     }
-
     .navbar nav a {
-        margin: 0.5rem;
+        margin: 0;
+        font-size: 0.9rem;
     }
-    
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 3rem;
     }
-
-    .hero-subtitle {
-        font-size: 1.2rem;
-    }
-
     .page-title {
-        font-size: 2rem;
-    }
-
-    .about-content {
-        flex-direction: column;
+        font-size: 2.5rem;
     }
 }
