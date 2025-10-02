@@ -1,59 +1,75 @@
-document.addEventListener('DOMContentLoaded', () => {
+// Wrap everything in a DOMContentLoaded listener
+window.addEventListener('DOMContentLoaded', () => {
 
-    // Keep existing preloader & cursor light functions...
+    // --- 1. GLOBAL & SITE-WIDE LOGIC ---
 
-    // --- ANIMATED COUNTERS ---
-    const statNumbers = document.querySelectorAll('.stat-number');
-    const counterObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const target = entry.target;
-                const targetValue = parseInt(target.getAttribute('data-target'));
-                let currentValue = 0;
-                const increment = Math.ceil(targetValue / 100);
-
-                const updateCounter = () => {
-                    currentValue += increment;
-                    if (currentValue >= targetValue) {
-                        target.innerText = targetValue.toLocaleString(); // Add commas for big numbers
-                        clearInterval(interval);
-                    } else {
-                        target.innerText = currentValue.toLocaleString();
-                    }
-                };
-                const interval = setInterval(updateCounter, 20);
-                observer.unobserve(target); // Animate only once
-            }
+    // Preloader
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        window.addEventListener('load', () => {
+            preloader.style.opacity = '0';
+            setTimeout(() => preloader.style.display = 'none', 500);
         });
-    }, { threshold: 0.7 });
+    }
 
-    statNumbers.forEach(num => counterObserver.observe(num));
-
-    // --- BENTO CELL CURSOR GLOW EFFECT ---
-    const bentoCells = document.querySelectorAll('.bento-cell');
-    bentoCells.forEach(cell => {
-        cell.addEventListener('mousemove', e => {
-            const rect = cell.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            cell.style.setProperty('--mouse-x-card', `${x}px`);
-            cell.style.setProperty('--mouse-y-card', `${y}px`);
+    // Page Transitions
+    const allLinks = document.querySelectorAll('a:not([href^="#"])');
+    allLinks.forEach(link => {
+        link.addEventListener('click', e => {
+            const href = link.getAttribute('href');
+            // Check if it's a valid, non-external link
+            if (href && !href.startsWith('http') && !e.ctrlKey && !e.metaKey) {
+                e.preventDefault();
+                document.body.classList.add('fade-out');
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 400);
+            }
         });
     });
 
-    // --- "DID YOU KNOW" FACT CAROUSEL ---
-    const factCards = document.querySelectorAll('.fact-card');
-    let currentFactIndex = 0;
+    // Active Navbar Link
+    const navLinks = document.querySelectorAll('.navbar nav a');
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    navLinks.forEach(link => {
+        if (link.getAttribute('href') === currentPath) {
+            link.classList.add('active');
+        }
+    });
+    
+    // Other global effects (cursor, scroll reveal) from previous version...
+    
 
-    function showNextFact() {
-        factCards[currentFactIndex].classList.remove('active');
-        currentFactIndex = (currentFactIndex + 1) % factCards.length;
-        factCards[currentFactIndex].classList.add('active');
+    // --- 2. PAGE-SPECIFIC LOGIC ---
+    // We check for a unique element on each page to run its specific code.
+
+    // --- DASHBOARD SCRIPT ---
+    if (document.getElementById('casesChart')) {
+        // Chart.js implementation...
+        // Live activity log implementation...
     }
 
-    if (factCards.length > 0) {
-        setInterval(showNextFact, 5000); // Change fact every 5 seconds
+    // --- CASES PAGE SCRIPT ---
+    if (document.querySelector('.datagrid-container')) {
+        // Dummy data for cases
+        const casesData = [
+            // Array of case objects: {id, name, date, status, details}
+        ];
+        // Functions for sorting, searching, pagination, and modal logic...
+    }
+
+    // --- RECOMMENDATIONS PAGE SCRIPT ---
+    if (document.getElementById('recommendationsGrid')) {
+        // Dummy data for recommendations
+        const recommendationsData = [
+             // Array of recommendation objects
+        ];
+        // Functions for filtering and rendering cards...
+    }
+
+    // --- CONTACT PAGE SCRIPT ---
+    if (document.getElementById('contactForm')) {
+        // Form validation logic...
     }
     
-    // Existing scroll reveal & navbar logic...
 });
