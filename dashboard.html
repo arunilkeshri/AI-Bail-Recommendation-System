@@ -3,68 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - AI Bail System</title>
+    <title>Dashboard - AI Justice Matrix</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <div id="preloader"><div class="preloader-icon">⚖️</div></div>
+    <div class="background-grid"></div>
+    <div class="cursor-light"></div>
 
-    <header class="navbar">
-        <a href="index.html" class="logo">⚖️ AI Justice</a>
-        <nav>
-            <a href="dashboard.html" class="active">Dashboard</a>
-            <a href="cases.html">Cases</a>
-            <a href="recommendations.html">Recommendations</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
+    <header class="navbar"></header>
 
-    <main class="dashboard-page">
-        <h2 class="page-title">System Dashboard</h2>
-        <section class="stats-grid">
-            <div class="stat-card">
-                <h3>Total Cases</h3>
-                <p>1,245</p>
-            </div>
-            <div class="stat-card">
-                <h3>Pending Recommendations</h3>
-                <p>98</p>
-            </div>
-            <div class="stat-card">
-                <h3>Approval Rate</h3>
-                <p>87%</p>
-            </div>
-            <div class="stat-card">
-                <h3>Average Processing Time</h3>
-                <p>4.2 hrs</p>
-            </div>
-        </section>
-        
-        <section class="charts-grid">
-            <div class="chart-card">
-                <h3>Recommendation Trends</h3>
-                <div class="chart-placeholder"></div>
-            </div>
-            <div class="chart-card">
-                <h3>Risk Score Distribution</h3>
-                <div class="chart-placeholder"></div>
+    <main class="page-content">
+        <section class="content-section">
+            <h1 class="page-title" data-scroll-reveal>System Dashboard</h1>
+            <div class="dashboard-grid">
+                
+                <div class="dashboard-card status-card" data-scroll-reveal>
+                    <h4>System Status</h4>
+                    <div class="status-indicator">
+                        <div class="status-light"></div>
+                        <p>All Systems Operational</p>
+                    </div>
+                    <p class="status-update">Last Check: Just Now</p>
+                </div>
+
+                <div class="dashboard-card" data-scroll-reveal>
+                    <h4>Cases Processed (7 Days)</h4>
+                    <canvas id="casesChart"></canvas>
+                </div>
+
+                <div class="dashboard-card large-card" data-scroll-reveal>
+                    <h4>Recommendation Distribution</h4>
+                    <canvas id="distributionChart"></canvas>
+                </div>
+                
+                <div class="dashboard-card" data-scroll-reveal>
+                    <h4>Risk Factor Analysis</h4>
+                    <canvas id="riskFactorChart"></canvas>
+                </div>
+
+                <div class="dashboard-card activity-card" data-scroll-reveal>
+                    <h4>Live Activity Log</h4>
+                    <ul class="activity-log">
+                        </ul>
+                </div>
             </div>
         </section>
     </main>
-
-    <footer class="footer">
-        <div class="footer-links">
-            <a href="dashboard.html">Dashboard</a>
-            <a href="cases.html">Cases</a>
-            <a href="recommendations.html">Recommendations</a>
-            <a href="about.html">About</a>
-            <a href="#">Legal</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-        </div>
-        <p>&copy; 2024 AI Bail Recommendation System. All rights reserved.</p>
-    </footer>
-
+    
+    <footer class="footer"></footer>
     <script src="script.js"></script>
 </body>
 </html>
