@@ -19,7 +19,7 @@
 
 /* Ensure the body uses the base background color and sets the font */
 body {
-    background-color: var(--bg-color);
+    background-color: var(--bg-color); /* THIS APPLIES THE DARK BG */
     color: var(--text-primary);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
@@ -97,12 +97,10 @@ body.fade-out .page-content {
     border-bottom: 1px solid var(--border-color);
     opacity: 0;
     animation: fadeIn 0.5s forwards;
-    /* You must add these delays manually or via JavaScript for a perfect stagger */
 }
 .activity-log li:nth-child(1) { animation-delay: 0.1s; }
 .activity-log li:nth-child(2) { animation-delay: 0.2s; }
 .activity-log li:nth-child(3) { animation-delay: 0.3s; }
-/* ... continue for more items */
 
 .activity-log li:first-child {
     border-top: none;
@@ -158,6 +156,8 @@ body.fade-out .page-content {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+    text-decoration: none; /* Crucial for links that act as buttons */
+    display: inline-block;
 }
 .action-btn:hover,
 .action-btn:focus {
@@ -175,7 +175,7 @@ body.fade-out .page-content {
 }
 .pagination-btn {
     background: none;
-    border: 1px solid var(--border-color);
+    border: 1: px solid var(--border-color);
     color: var(--text-primary);
     padding: 0.5rem 1rem;
     margin: 0 0.25rem;
@@ -196,8 +196,6 @@ body.fade-out .page-content {
 
 /* --- 6. MODAL STYLES --- */
 .modal {
-    /* Default display:none should be set in JavaScript, but here's the style when it's visible */
-    /* display: none; */ 
     position: fixed;
     z-index: 9999;
     left: 0;
@@ -206,7 +204,7 @@ body.fade-out .page-content {
     height: 100%;
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(5px);
-    display: flex; /* Centers content */
+    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -282,7 +280,6 @@ body.fade-out .page-content {
     width: 100px;
     height: 100px;
     margin: 1rem auto;
-    /* Example: Shows a gauge filled to 75% */
     background: conic-gradient(var(--primary-glow) 0% 75%, var(--border-color) 75% 100%); 
     border-radius: 50%;
     display: grid;
@@ -291,7 +288,6 @@ body.fade-out .page-content {
     font-size: 1.2rem;
     position: relative;
 }
-/* Center circle/hole for the gauge */
 .risk-gauge::after {
     content: ''; 
     background: var(--card-bg); 
@@ -301,7 +297,6 @@ body.fade-out .page-content {
     position: absolute;
 }
 .risk-value {
-    /* Put this class on the element inside the gauge to show the number */
     z-index: 1;
     color: var(--text-primary);
 }
@@ -332,24 +327,27 @@ body.fade-out .page-content {
     box-shadow: 0 0 5px rgba(68, 255, 68, 0.5);
 }
 
+
 /* --- 9. LAYOUT & NAVIGATION STYLES (CRITICAL) --- */
 
 /* The main container for the entire page */
 .main-container {
     display: flex;
-    min-height: 100vh; /* Full height of the viewport */
-    background-color: var(--bg-color);
+    min-height: 100vh;
+    background-color: var(--bg-color); /* FALLBACK BACKGROUND FOR THE WHOLE PAGE */
+    width: 100vw;
 }
 
 /* Sidebar/Navigation */
 .sidebar {
     width: 250px;
-    background-color: var(--card-bg); /* Use the card background for the sidebar */
+    background-color: var(--card-bg); 
     padding: 2rem 1rem;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.4);
-    position: fixed; /* Keep sidebar fixed while content scrolls */
+    position: fixed;
     height: 100vh;
     overflow-y: auto;
+    z-index: 1000;
 }
 
 .logo {
@@ -370,7 +368,9 @@ body.fade-out .page-content {
 }
 
 .nav-links a {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
     color: var(--text-primary);
     text-decoration: none;
     padding: 0.8rem 1rem;
@@ -391,8 +391,8 @@ body.fade-out .page-content {
 
 /* Main Content Area */
 .content-area {
-    flex-grow: 1; /* Take up the remaining space */
-    margin-left: 250px; /* Offset to clear the fixed sidebar */
+    flex-grow: 1;
+    margin-left: 250px;
     padding: 2rem;
 }
 
