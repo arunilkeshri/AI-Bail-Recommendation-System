@@ -3,89 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Case Files - AI Justice Matrix</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <title>AI Justice Matrix - Case Files</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div id="preloader"><div class="preloader-icon">⚖️</div></div>
-    <div class="background-grid"></div>
-    <div class="cursor-light"></div>
-
-    <header class="navbar">
-        <a href="index.html" class="logo">AI Justice ⚖️</a>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="dashboard.html">Dashboard</a>
-            <a href="cases.html" class="active">Case Files</a>
-            <a href="recommendations.html">Recommendations</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
-
-    <main class="page-content">
-        <section class="content-section">
-            <h1 class="page-title" data-scroll-reveal>Case File Database</h1>
-            
-            <div class="datagrid-container" data-scroll-reveal>
-                <div class="datagrid-controls">
-                    <input type="text" id="searchInput" placeholder="Search cases by name or ID...">
+    <div class="main-container">
+        
+        <aside class="sidebar">
+            <div class="logo">AI Justice ⚖️</div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="cases.html" class="active"><i class="fas fa-file-alt"></i> Case Files</a></li>
+                <li><a href="recommendations.html"><i class="fas fa-lightbulb"></i> Recommendations</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </aside>
+        <main class="content-area">
+            <header class="header">
+                <h1>Case Files Management</h1>
+                <div class="user-profile">
+                    <span>Admin User</span>
+                    <img src="https://via.placeholder.com/40/00bfff/FFFFFF?text=A" alt="User Avatar">
                 </div>
-                
-                <table class="datagrid">
-                    <thead>
-                        <tr>
-                            <th data-sort="id">Case ID</th>
-                            <th data-sort="name">Defendant Name</th>
-                            <th data-sort="date">Date Filed</th>
-                            <th data-sort="status">Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="caseTableBody">
-                        </tbody>
-                </table>
-                
-                <div class="datagrid-pagination">
+            </header>
+
+            <div class="page-content">
+                <div class="datagrid-container">
+                    
+                    <div class="datagrid-controls">
+                        <input type="text" placeholder="Search by Case ID, Name, or Status...">
                     </div>
-            </div>
-        </section>
-    </main>
 
-    <div id="caseModal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <div id="modalBody">
+                    <table class="datagrid">
+                        <thead>
+                            <tr>
+                                <th>Case ID</th>
+                                <th>Defendant Name</th>
+                                <th>Risk Score</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#781</td>
+                                <td>Jane Doe</td>
+                                <td>4.2 / 10</td>
+                                <td><span style="color: #00ff00;">Low Risk</span></td>
+                                <td><button class="action-btn">View Details</button></td>
+                            </tr>
+                            <tr>
+                                <td>#780</td>
+                                <td>John Smith</td>
+                                <td>8.9 / 10</td>
+                                <td><span style="color: #ff4444;">High Risk</span></td>
+                                <td><button class="action-btn">View Details</button></td>
+                            </tr>
+                            <tr>
+                                <td>#779</td>
+                                <td>Alex Johnson</td>
+                                <td>6.5 / 10</td>
+                                <td><span style="color: #ffcc00;">Medium Risk</span></td>
+                                <td><button class="action-btn">View Details</button></td>
+                            </tr>
+                            </tbody>
+                    </table>
+
+                    <div class="datagrid-pagination">
+                        <button class="pagination-btn">&laquo; Previous</button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <button class="pagination-btn">Next &raquo;</button>
+                    </div>
+
                 </div>
-        </div>
+                </div>
+        </main>
     </div>
-    
-    <footer class="footer">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h4>AI Justice ⚖️</h4>
-                <p>Redefining legal frameworks with intelligent, data-driven solutions.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Navigate</h4>
-                <a href="dashboard.html">Dashboard</a>
-                <a href="cases.html">Case Files</a>
-                <a href="about.html">About</a>
-            </div>
-            <div class="footer-col">
-                <h4>Legal</h4>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Data Compliance</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 AI Justice Initiative. All Rights Reserved.</p>
-        </div>
-    </footer>
-    <script src="assets/js/script.js"></script>
 </body>
 </html>
