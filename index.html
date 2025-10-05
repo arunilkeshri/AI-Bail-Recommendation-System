@@ -3,38 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Justice Matrix - The Command Center</title>
-
-    <!-- ✅ Base Path for GitHub Pages -->
-    <base href="/AI-Bail-Recommendation-System/">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-    <!-- ✅ Asset path fixed -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <title>AI Justice Matrix - Home</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div id="preloader"><div class="preloader-icon">⚖️</div></div>
-    <div class="background-grid"></div>
-    <div class="cursor-light"></div>
+    <div class="main-container">
+        
+        <aside class="sidebar">
+            <div class="logo">AI Justice ⚖️</div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="cases.html"><i class="fas fa-file-alt"></i> Case Files</a></li>
+                <li><a href="recommendations.html"><i class="fas fa-lightbulb"></i> Recommendations</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </aside>
+        <main class="content-area">
+            <header class="header">
+                <h1>Welcome to the AI Justice Matrix</h1>
+                <div class="user-profile">
+                    <span>Admin User</span>
+                    <img src="https://via.placeholder.com/40/00bfff/FFFFFF?text=A" alt="User Avatar">
+                </div>
+            </header>
 
-    <header class="navbar">
-        <a href="index.html" class="logo">AI Justice ⚖️</a>
-        <nav>
-            <a href="index.html" class="active">Home</a>
-            <a href="dashboard.html">Dashboard</a>
-            <a href="cases.html">Case Files</a>
-            <a href="recommendations.html">Recommendations</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
-
-    <!-- (rest of your content remains unchanged) -->
-
-    <!-- ✅ JS path fixed -->
-    <script src="assets/js/script.js"></script>
-</body>
+            <div class="page-content">
+                <div class="dashboard-card large-card" style="text-align: center;">
+                    <h2>⚖️ AI Bail Recommendation System</h2>
+                    <p>This is the command center for data-driven judicial insights. Navigate using the sidebar to view the dashboard, manage case files, or generate new bail recommendations.</p>
+                    <a href="dashboard.html" class="action-btn" style="margin-top: 1rem;">Go to Dashboard</a>
+                </div>
+            </div>
+            </main>
+        </div>
+    </body>
 </html>
