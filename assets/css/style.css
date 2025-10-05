@@ -1,6 +1,32 @@
-/* ADD THIS TO YOUR EXISTING style.css */
+/* --- 1. GLOBAL VARIABLES (CRITICAL FOR DESIGN TO SHOW) --- */
+:root {
+    /* Base Colors for a Dark/Cyber Theme */
+    --bg-color: #1a1a2e; /* Dark background */
+    --card-bg: #2c3a57; /* Slightly lighter for cards */
+    
+    /* Accent & Glow Colors */
+    --primary-glow: #00bfff; /* Deep Sky Blue/Cyan for glow */
+    --primary-glow-rgb: 0, 191, 255; /* RGB version for shadows/opacity */
+    
+    /* Text Colors */
+    --text-primary: #ffffff;
+    --text-secondary: #aaaaaa;
+    
+    /* Borders and Dividers */
+    --border-color: rgba(255, 255, 255, 0.15);
+    --border-glow: #00bfff; /* Use glow color for modal border */
+}
 
-/* --- GLOBAL PAGE TRANSITIONS --- */
+/* Ensure the body uses the base background color and sets the font */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- 2. GLOBAL PAGE TRANSITIONS --- */
 .page-content {
     opacity: 1;
     transition: opacity 0.4s ease-in-out;
@@ -9,7 +35,22 @@ body.fade-out .page-content {
     opacity: 0;
 }
 
-/* --- DASHBOARD STYLES --- */
+/* --- 3. KEYFRAME ANIMATIONS --- */
+@keyframes pulse-green {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+@keyframes fadeIn { 
+    to { opacity: 1; } 
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* --- 4. DASHBOARD STYLES --- */
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -20,7 +61,6 @@ body.fade-out .page-content {
     border: 1px solid var(--border-color);
     border-radius: 20px;
     padding: 1.5rem;
-    /* Add a subtle shadow for depth */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 .dashboard-card.large-card {
@@ -28,68 +68,54 @@ body.fade-out .page-content {
 }
 .dashboard-card h4 {
     margin-bottom: 1.5rem;
-    color: var(--text-primary); /* Ensure heading color is consistent */
+    color: var(--text-primary);
 }
-
-/* Status Indicator (Enhancement: Better positioning for clarity) */
 .status-indicator {
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin: 1.5rem 0; /* Adjusted margin for better spacing */
+    margin: 1.5rem 0;
 }
 .status-light {
     width: 15px;
     height: 15px;
     background: #00ff00;
     border-radius: 50%;
-    /* Increased glow effect for a sci-fi look */
     box-shadow: 0 0 10px #00ff00, 0 0 20px rgba(0, 255, 0, 0.5);
-    animation: pulse-green 2s infinite ease-in-out; /* Added ease-in-out for smoother pulse */
+    animation: pulse-green 2s infinite ease-in-out;
 }
-@keyframes pulse-green {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.6; transform: scale(1.1); } /* More visible pulse */
-}
-
-/* Activity Log (Correction/Enhancement: Staggered animation) */
 .activity-log {
     list-style: none;
     height: 200px;
     overflow-y: auto;
     font-size: 0.9rem;
-    padding-left: 0; /* Remove default padding for list */
+    padding-left: 0;
     margin: 0;
 }
 .activity-log li {
-    padding: 0.75rem 0; /* Slightly more vertical padding */
-    border-bottom: 1px solid rgba(var(--border-color-rgb), 0.5); /* Use lighter border */
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border-color);
     opacity: 0;
     animation: fadeIn 0.5s forwards;
-    /* Stagger the animation based on the list item's index */
-    /* This requires a JS or server-side loop to apply a unique 'animation-delay' per item.
-       For pure CSS, we can target up to the 5th item as an example: */
+    /* You must add these delays manually or via JavaScript for a perfect stagger */
 }
 .activity-log li:nth-child(1) { animation-delay: 0.1s; }
 .activity-log li:nth-child(2) { animation-delay: 0.2s; }
 .activity-log li:nth-child(3) { animation-delay: 0.3s; }
-.activity-log li:nth-child(4) { animation-delay: 0.4s; }
-.activity-log li:nth-child(5) { animation-delay: 0.5s; }
-/* Note: You must define @keyframes fadeIn somewhere in your CSS. */
-/* @keyframes fadeIn { to { opacity: 1; } } */
+/* ... continue for more items */
 
 .activity-log li:first-child {
-    border-top: none; /* Removed unnecessary border-top */
+    border-top: none;
 }
 
-/* --- DATAGRID (CASES PAGE) --- */
+
+/* --- 5. DATAGRID (CASES PAGE) --- */
 .datagrid-container {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 20px;
     padding: 1.5rem;
 }
-/* Datagrid Controls (Enhancement: Better focus state) */
 .datagrid-controls input {
     width: 100%;
     padding: 0.8rem;
@@ -102,10 +128,9 @@ body.fade-out .page-content {
 }
 .datagrid-controls input:focus {
     border-color: var(--primary-glow);
-    box-shadow: 0 0 8px rgba(var(--primary-glow-rgb), 0.6); /* Assuming you have an RGB variable */
+    box-shadow: 0 0 8px rgba(var(--primary-glow-rgb), 0.6);
     outline: none;
 }
-
 .datagrid {
     width: 100%;
     border-collapse: collapse;
@@ -115,18 +140,16 @@ body.fade-out .page-content {
     text-align: left;
     border-bottom: 2px solid var(--primary-glow);
     cursor: pointer;
-    user-select: none; /* Prevent text selection on sortable headers */
+    user-select: none;
 }
 .datagrid td {
     padding: 1rem;
     border-bottom: 1px solid var(--border-color);
 }
-/* Datagrid Hover (Correction: Use a more subtle, consistent color) */
 .datagrid tbody tr:hover {
-    background: rgba(var(--primary-glow-rgb), 0.1); /* Use the glow color for hover */
+    background: rgba(var(--primary-glow-rgb), 0.1);
     cursor: pointer;
 }
-/* Action Button (Enhancement: Add hover/focus states) */
 .action-btn {
     background: none;
     border: 1px solid var(--primary-glow);
@@ -139,25 +162,23 @@ body.fade-out .page-content {
 .action-btn:hover,
 .action-btn:focus {
     background: var(--primary-glow);
-    color: var(--bg-color); /* Text color becomes the main background color */
+    color: var(--bg-color);
     box-shadow: 0 0 5px var(--primary-glow);
     outline: none;
 }
-
 .datagrid-pagination {
     text-align: center;
     margin-top: 1.5rem;
-    display: flex; /* Enhancement for centering buttons */
+    display: flex;
     justify-content: center;
     align-items: center;
 }
-/* Pagination Buttons (Enhancement: Consistent sizing and states) */
 .pagination-btn {
     background: none;
     border: 1px solid var(--border-color);
     color: var(--text-primary);
     padding: 0.5rem 1rem;
-    margin: 0 0.25rem; /* Increased margin */
+    margin: 0 0.25rem;
     cursor: pointer;
     border-radius: 5px;
     min-width: 40px;
@@ -173,9 +194,10 @@ body.fade-out .page-content {
     box-shadow: 0 0 8px rgba(var(--primary-glow-rgb), 0.6);
 }
 
-/* --- MODAL STYLES --- */
+/* --- 6. MODAL STYLES --- */
 .modal {
-    display: none;
+    /* Default display:none should be set in JavaScript, but here's the style when it's visible */
+    /* display: none; */ 
     position: fixed;
     z-index: 9999;
     left: 0;
@@ -184,25 +206,21 @@ body.fade-out .page-content {
     height: 100%;
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(5px);
-    /* Correction: Use flexbox to easily center content */
-    display: flex;
+    display: flex; /* Centers content */
     justify-content: center;
     align-items: center;
 }
 .modal-content {
     background: var(--bg-color);
-    /* Removed 'margin: 10% auto;' since flexbox is centering */
     padding: 2rem;
     border: 1px solid var(--border-glow);
     border-radius: 20px;
-    max-width: 90%; /* Use max-width for better mobile responsiveness */
+    max-width: 90%;
     width: 600px;
     position: relative;
-    animation: slideIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Added better easing */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Stronger modal shadow */
+    animation: slideIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
-/* Note: You must define @keyframes slideIn somewhere in your CSS. */
-
 .modal-close {
     position: absolute;
     top: 1rem;
@@ -216,7 +234,7 @@ body.fade-out .page-content {
     color: var(--primary-glow);
 }
 
-/* --- RECOMMENDATIONS PAGE (Enhancements) --- */
+/* --- 7. RECOMMENDATIONS PAGE --- */
 .filter-controls {
     margin-bottom: 2rem;
     text-align: center;
@@ -229,7 +247,7 @@ body.fade-out .page-content {
     border: 1px solid var(--border-color);
     color: var(--text-primary);
     padding: 0.6rem 1.2rem;
-    border-radius: 25px; /* Pill shape */
+    border-radius: 25px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -243,13 +261,11 @@ body.fade-out .page-content {
     color: var(--bg-color);
     box-shadow: 0 0 10px rgba(var(--primary-glow-rgb), 0.5);
 }
-
 .recommendation-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
 }
-
 .recommendation-card {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
@@ -262,13 +278,12 @@ body.fade-out .page-content {
     transform: translateY(-5px);
     border-color: var(--primary-glow);
 }
-
 .risk-gauge {
-    /* Placeholder for actual gauge styling (e.g., a circle/semicircle chart) */
     width: 100px;
     height: 100px;
     margin: 1rem auto;
-    background: conic-gradient(var(--primary-glow) 0% 75%, var(--border-color) 75% 100%);
+    /* Example: Shows a gauge filled to 75% */
+    background: conic-gradient(var(--primary-glow) 0% 75%, var(--border-color) 75% 100%); 
     border-radius: 50%;
     display: grid;
     place-items: center;
@@ -276,29 +291,28 @@ body.fade-out .page-content {
     font-size: 1.2rem;
     position: relative;
 }
+/* Center circle/hole for the gauge */
 .risk-gauge::after {
-    content: attr(data-risk); /* Assumes you use a data attribute for the value */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: var(--card-bg); /* Center hole */
+    content: ''; 
+    background: var(--card-bg); 
     width: 70px;
     height: 70px;
     border-radius: 50%;
-    display: grid;
-    place-items: center;
+    position: absolute;
+}
+.risk-value {
+    /* Put this class on the element inside the gauge to show the number */
+    z-index: 1;
+    color: var(--text-primary);
 }
 
 
-/* --- ABOUT & CONTACT PAGES --- */
+/* --- 8. ABOUT & CONTACT PAGES --- */
 .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
 }
-
-/* Team Card (Example Style) */
 .team-card {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
@@ -306,8 +320,7 @@ body.fade-out .page-content {
     padding: 1rem;
     text-align: center;
 }
-
-/* Contact Form Validation (Example Style) */
+/* Contact Form Validation */
 .contact-form input:invalid:not(:focus),
 .contact-form textarea:invalid:not(:focus) {
     border: 1px solid #ff4444; /* Error red */
