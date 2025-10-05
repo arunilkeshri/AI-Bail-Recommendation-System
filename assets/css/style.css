@@ -1,0 +1,49 @@
+/* ADD THIS TO YOUR EXISTING style.css */
+
+/* --- GLOBAL PAGE TRANSITIONS --- */
+.page-content {
+    opacity: 1;
+    transition: opacity 0.4s ease-in-out;
+}
+body.fade-out .page-content {
+    opacity: 0;
+}
+
+/* --- DASHBOARD STYLES --- */
+.dashboard-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.dashboard-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 1.5rem; }
+.dashboard-card.large-card { grid-column: span 2; }
+.dashboard-card h4 { margin-bottom: 1.5rem; }
+.status-indicator { display: flex; align-items: center; gap: 1rem; margin: 1rem 0; }
+.status-light { width: 15px; height: 15px; background: #00ff00; border-radius: 50%; box-shadow: 0 0 15px #00ff00; animation: pulse-green 2s infinite; }
+@keyframes pulse-green { 50% { opacity: 0.5; } }
+.activity-log { list-style: none; height: 200px; overflow-y: auto; font-size: 0.9rem; }
+.activity-log li { padding: 0.5rem 0; border-bottom: 1px solid var(--border-color); opacity: 0; animation: fadeIn 0.5s forwards; }
+.activity-log li:first-child { border-top: 1px solid var(--border-color); }
+
+/* --- DATAGRID (CASES PAGE) --- */
+.datagrid-container { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 1.5rem; }
+.datagrid-controls input { width: 100%; padding: 0.8rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 10px; margin-bottom: 1rem; }
+.datagrid { width: 100%; border-collapse: collapse; }
+.datagrid th { padding: 1rem; text-align: left; border-bottom: 2px solid var(--primary-glow); cursor: pointer; }
+.datagrid td { padding: 1rem; border-bottom: 1px solid var(--border-color); }
+.datagrid tbody tr:hover { background: rgba(0, 191, 255, 0.1); }
+.action-btn { background: none; border: 1px solid var(--primary-glow); color: var(--primary-glow); padding: 0.4rem 0.8rem; border-radius: 5px; cursor: pointer; }
+.datagrid-pagination { text-align: center; margin-top: 1.5rem; }
+.pagination-btn { background: none; border: 1px solid var(--border-color); color: var(--text-primary); padding: 0.5rem 1rem; margin: 0 0.2rem; cursor: pointer; }
+.pagination-btn.active { background: var(--primary-glow); color: var(--bg-color); }
+
+/* --- MODAL STYLES --- */
+.modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
+.modal-content { background: var(--bg-color); margin: 10% auto; padding: 2rem; border: 1px solid var(--border-glow); border-radius: 20px; max-width: 600px; position: relative; animation: slideIn 0.5s ease; }
+.modal-close { position: absolute; top: 1rem; right: 1.5rem; font-size: 2rem; cursor: pointer; }
+
+/* --- RECOMMENDATIONS PAGE --- */
+.filter-controls { margin-bottom: 2rem; text-align: center; }
+.filter-btn { /* Style buttons */ }
+.recommendation-card { /* Style your recommendation cards with gauges */ }
+.risk-gauge { /* Style risk gauge */ }
+
+/* --- ABOUT & CONTACT PAGES --- */
+.team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+/* Add styles for timeline, team cards, contact form validation etc. */
